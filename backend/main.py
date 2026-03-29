@@ -7,7 +7,10 @@ from auth.db import init_db, SessionLocal, CreditRecord, User
 from auth.security import decode_token
 from auth.routes import auth_bp
 from datetime import datetime
-import json
+from dotenv import load_dotenv
+import json, os
+
+load_dotenv()
 
 app = Flask(__name__)
 CORS(app)

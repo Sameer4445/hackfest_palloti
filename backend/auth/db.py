@@ -12,11 +12,13 @@ Base = declarative_base()
 class User(Base):
     __tablename__ = "users"
 
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, nullable=False)
-    email = Column(String, unique=True, index=True, nullable=False)
-    password = Column(String, nullable=False)
-    role = Column(String, default="user")  # "user" or "admin"
+    id         = Column(Integer, primary_key=True, index=True)
+    name       = Column(String, nullable=False)
+    email      = Column(String, unique=True, index=True, nullable=False)
+    password   = Column(String, nullable=True)          # nullable for OAuth users
+    role       = Column(String, default="user")
+    google_id  = Column(String, nullable=True, unique=True)
+    avatar     = Column(String, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
 
     credit_records = relationship("CreditRecord", back_populates="user")

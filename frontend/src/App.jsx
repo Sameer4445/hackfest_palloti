@@ -7,6 +7,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import History from './pages/History';
 import AdminDashboard from './pages/AdminDashboard';
+import GoogleCallback from './pages/GoogleCallback';
 import { LogOut, History as HistoryIcon, LayoutDashboard } from 'lucide-react';
 
 function ProtectedRoute({ children, adminOnly = false }) {
@@ -49,7 +50,11 @@ function Navbar() {
                 <HistoryIcon size={15} /> History
               </Link>
               <div className="w-px h-4 bg-slate-200 mx-1" />
-              <span className="text-sm text-slate-500 hidden sm:block px-2">{user.name}</span>
+              {user.avatar
+                ? <img src={user.avatar} alt={user.name} className="w-7 h-7 rounded-full object-cover border border-slate-200" />
+                : <div className="w-7 h-7 rounded-full bg-brand-100 flex items-center justify-center text-brand-700 text-xs font-bold">{user.name?.[0]?.toUpperCase()}</div>
+              }
+              <span className="text-sm text-slate-500 hidden sm:block px-1">{user.name}</span>
               <button onClick={handleLogout} className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm text-slate-500 hover:bg-red-50 hover:text-red-600 transition-colors">
                 <LogOut size={15} />
               </button>
@@ -71,6 +76,7 @@ function AppRoutes() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/auth/callback" element={<GoogleCallback />} />
           <Route path="/" element={
             <ProtectedRoute>
               <ApplicationForm setScoringResult={setScoringResult} />
