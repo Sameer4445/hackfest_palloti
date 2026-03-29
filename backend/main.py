@@ -173,7 +173,6 @@ def score_application():
 
         # ── Income guardrails (pre-ML) ────────────────────────────────────────
         raw_income = float(app_dict.get('avg_daily_income') or 0) * float(app_dict.get('work_days_per_month') or 26)
-        print(f"[predict] income={raw_income}, data keys={list(app_dict.keys())}")  # debug
         if raw_income == 0:
             return jsonify({"error": "No income available. Please provide valid income details."}), 400
         if raw_income < 3000:
@@ -356,4 +355,6 @@ def admin_stats():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8000, debug=True)
+    import os
+    port = int(os.environ.get("PORT", 8000))
+    app.run(host="0.0.0.0", port=port, debug=False)
