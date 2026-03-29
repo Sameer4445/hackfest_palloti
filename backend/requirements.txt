@@ -1,0 +1,13 @@
+flask==3.0.3
+flask-cors==4.0.1
+pymongo==4.7.2
+scikit-learn==1.8.0
+pandas==2.2.2
+numpy==1.26.4
+python-dotenv==1.0.1
+pydantic==2.7.4
+joblib==1.4.2
+python-jose[cryptography]==3.5.0
+passlib==1.7.4
+bcrypt==4.0.1
+sqlalchemy==2.0.48

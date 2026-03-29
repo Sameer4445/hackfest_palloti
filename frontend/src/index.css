@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  /* Brand */
+  --color-brand-50:  #f0fdf4;
+  --color-brand-100: #dcfce7;
+  --color-brand-200: #bbf7d0;
+  --color-brand-500: #22c55e;
+  --color-brand-600: #16a34a;
+  --color-brand-700: #15803d;
+
+  /* Accent blue */
+  --color-accent-50:  #eff6ff;
+  --color-accent-100: #dbeafe;
+  --color-accent-500: #3b82f6;
+  --color-accent-600: #2563eb;
+
+  /* Surface */
+  --color-surface:        #ffffff;
+  --color-surface-raised: #f8fafc;
+  --color-surface-muted:  #f1f5f9;
+
+  /* Text */
+  --color-text-primary:   #0f172a;
+  --color-text-secondary: #475569;
+  --color-text-muted:     #94a3b8;
+
+  /* Status */
+  --color-success: #16a34a;
+  --color-warning: #d97706;
+  --color-danger:  #dc2626;
+
+  /* Legacy compat */
+  --color-primary-50:  #f0fdf4;
+  --color-primary-100: #dcfce7;
+  --color-primary-500: #22c55e;
+  --color-primary-600: #16a34a;
+  --color-primary-900: #14532d;
+
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --radius-card: 16px;
+  --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.06);
+  --shadow-card-hover: 0 4px 16px 0 rgb(0 0 0 / 0.08);
+  --shadow-elevated: 0 8px 32px 0 rgb(0 0 0 / 0.10);
+}
+
+/* ── Base ──────────────────────────────────────────────────────────────────── */
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+
+  body {
+    @apply font-sans antialiased text-slate-900;
+    background: #f8fafc;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  h1, h2, h3, h4 { @apply font-semibold tracking-tight; }
+}
+
+/* ── Components ────────────────────────────────────────────────────────────── */
+@layer components {
+
+  /* Card */
+  .card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    box-shadow: var(--shadow-card);
+    transition: box-shadow 0.2s ease;
+  }
+  .card:hover { box-shadow: var(--shadow-card-hover); }
+
+  .card-elevated {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    box-shadow: var(--shadow-elevated);
+  }
+
+  /* Legacy glass-card alias */
+  .glass-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    box-shadow: var(--shadow-card);
+  }
+
+  /* Form inputs */
+  .input-field {
+    @apply w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white
+           text-slate-900 placeholder-slate-400 text-sm
+           focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-500
+           transition-all duration-150 mt-1;
+  }
+
+  .label-text {
+    @apply text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1 block;
+  }
+
+  /* Buttons */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl
+           bg-brand-600 text-white text-sm font-semibold
+           hover:bg-brand-700 active:scale-[0.98]
+           transition-all duration-150
+           disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100
+           shadow-sm;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl
+           border border-slate-200 text-slate-600 text-sm font-medium
+           hover:bg-slate-50 hover:border-slate-300 active:scale-[0.98]
+           transition-all duration-150;
+  }
+
+  /* Status badges */
+  .badge {
+    @apply inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold;
+  }
+  .badge-green  { @apply bg-green-100 text-green-700; }
+  .badge-red    { @apply bg-red-100 text-red-700; }
+  .badge-yellow { @apply bg-amber-100 text-amber-700; }
+  .badge-blue   { @apply bg-blue-100 text-blue-700; }
+  .badge-purple { @apply bg-purple-100 text-purple-700; }
+
+  /* Section divider label */
+  .section-label {
+    @apply text-xs font-bold uppercase tracking-widest text-slate-400 mb-3;
+  }
+}
+
+/* ── Animations ────────────────────────────────────────────────────────────── */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes scoreRing {
+  from { stroke-dashoffset: 339; }
+}
+
+.animate-slide-up  { animation: slideUp 0.4s ease-out forwards; }
+.animate-fade-in   { animation: fadeIn 0.3s ease-out forwards; }
+.animate-score-ring { animation: scoreRing 1s ease-out forwards; }
+
+.stagger-1 { animation-delay: 80ms; }
+.stagger-2 { animation-delay: 160ms; }
+.stagger-3 { animation-delay: 240ms; }
+.stagger-4 { animation-delay: 320ms; }
